@@ -12,7 +12,6 @@ import SearchBox from './SearchBox.vue'
 
 <style scoped>
 header {
-  z-index: 1;
   position: sticky;
   top: 0;
 

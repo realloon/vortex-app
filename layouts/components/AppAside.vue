@@ -44,7 +44,7 @@ aside {
   top: 49px;
 
   box-sizing: border-box;
-  height: 100vh;
+  height: calc(100vh - 49px);
   padding: 16px;
   border-right: var(--border-base);
 
