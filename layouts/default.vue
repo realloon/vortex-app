@@ -24,7 +24,7 @@ import AppRight from './components/AppRight.vue'
 
 main {
   flex-grow: 1;
-  margin-block-start: 16px;
+  margin-block: 16px 48px;
 
   margin-inline: 16px;
   @media screen and (min-width: 768px) {
