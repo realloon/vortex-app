@@ -1,0 +1,69 @@
+:root {
+  /* S color */
+  --color-font: #333;
+  --color-lighter: #353d41;
+  --color-page: #fff;
+  --color-disabele-font: #b7b7b7;
+  --color-disabele-back: #f3f3f3;
+  --color-ctrl: #e6ebee;
+  --color-ctrl-hover: #f6f8f9;
+  --color-ctrl-active: #e6ebee;
+  /* Font */
+  --font-size: 16px;
+  --font-wenkai: 'LXGW WenKai', sans-serif;
+  --font-mono: 'Monaco', monospace;
+  /* Border */
+  --border-base: 1px solid #eef0f4;
+
+  font-size: var(--font-size);
+
+  @media (prefers-color-scheme: dark) {
+    --color-font: #fff;
+    --color-lighter: #bbc9d3;
+    --color-page: #101214;
+    --border-base: 1px solid #191b21;
+    --color-disabele-font: #535456;
+    --color-disabele-back: #1a1c1e;
+    --color-ctrl: #242629;
+    --color-ctrl-hover: #191c1f;
+    --color-ctrl-active: #2c3236;
+  }
+}
+
+body {
+  margin: 0;
+  color: var(--color-font);
+  background-color: var(--color-page);
+
+  font-family: var(--font-wenkai);
+  line-height: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-block: 0;
+}
+
+ul,
+ol {
+  padding-inline-start: 0;
+  margin-block: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: unset;
+}
+
+menu {
+  margin: 0;
+  padding-inline-start: 0;
+}

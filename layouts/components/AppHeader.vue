@@ -1,0 +1,45 @@
+<script setup lang="ts">
+import SearchBox from './SearchBox.vue'
+</script>
+
+<template>
+  <header>
+    <h1>Vortex</h1>
+    <SearchBox />
+    <div class="avatar"></div>
+  </header>
+</template>
+
+<style scoped>
+header {
+  z-index: 1;
+  position: sticky;
+  top: 0;
+
+  color: var(--color-font);
+  background-color: var(--color-page);
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  height: 48px;
+  padding-inline: 16px;
+  border-bottom: var(--border-base);
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+.avatar {
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  border: var(--border-base);
+  border-radius: 50%;
+  background-color: brown;
+}
+</style>
