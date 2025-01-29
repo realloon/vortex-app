@@ -10,26 +10,25 @@ const draftStore = useDraftStore()
 const title = ref(draftStore.draft.title)
 const content = ref(draftStore.draft.content)
 
-const formatted = computed(() => content.value.replaceAll('\n', '\\n'))
 const isComplated = computed(() => title.value.length > 2 && content.value)
 
 const { $graphql } = useNuxtApp()
-
+const router = useRouter()
 async function createPost() {
+  const codedTitle = encodeURIComponent(title.value)
+  const codedContent = encodeURIComponent(content.value)
+  
   try {
     await $graphql.default.request(`
       mutation {
-        createPost(author_id: "0", title: "${title.value}", content: "${formatted.value}") {
+        createPost(author_id: "0", title: "${codedTitle}", content: "${codedContent}") {
           title
         }
       }
     `)
-
-    console.log('发帖成功')
-    const router = useRouter()
+    draftStore.draft = { title: '', content: '', date: 0 }
     router.push('/posts')
   } catch (err) {
-    console.log('发帖失败')
     console.error(err)
   }
 }
@@ -46,7 +45,6 @@ const saveDraft = debounce(() => {
   draftStore.draft = draft.value
   isSaved.value = true
 })
-
 function handleInput() {
   isSaved.value = false
   saveDraft()
