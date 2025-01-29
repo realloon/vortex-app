@@ -38,11 +38,15 @@ aside {
   margin-right: 16px;
   border-radius: 8px;
 
-  display: flex;
   flex-direction: column;
 
   & > .card:not(:last-child) {
     border-bottom: var(--border-base);
+  }
+
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
   }
 }
 
