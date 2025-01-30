@@ -3,6 +3,7 @@
   --color-font: #333;
   --color-lighter: #353d41;
   --color-page: #fff;
+  --color-panel: #f6f8f9;
   --color-disabele-font: #b7b7b7;
   --color-disabele-back: #f3f3f3;
   --color-ctrl: #e6ebee;
@@ -21,6 +22,7 @@
     --color-font: #fff;
     --color-lighter: #bbc9d3;
     --color-page: #101214;
+    --color-panel: #000;
     --border-base: 1px solid #191b21;
     --color-disabele-font: #535456;
     --color-disabele-back: #1a1c1e;

@@ -32,7 +32,7 @@ aside {
   position: sticky;
   top: calc(49px + 1rem);
 
-  background-color: black;
+  background-color: var(--color-panel);
   flex-basis: 320px;
   flex-shrink: 0;
   margin-right: 16px;
