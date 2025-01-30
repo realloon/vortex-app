@@ -9,6 +9,7 @@
   --color-ctrl: #e6ebee;
   --color-ctrl-hover: #f6f8f9;
   --color-ctrl-active: #e6ebee;
+  --color-preview-hover: var(--color-panel);
   /* Font */
   --font-size: 16px;
   --font-wenkai: 'LXGW WenKai', sans-serif;
@@ -29,6 +30,7 @@
     --color-ctrl: #242629;
     --color-ctrl-hover: #191c1f;
     --color-ctrl-active: #2c3236;
+    --color-preview-hover: #1b1d1f;
   }
 }
 
@@ -39,6 +41,10 @@ body {
 
   font-family: var(--font-wenkai);
   line-height: 1;
+}
+
+article {
+  line-height: 1.5;
 }
 
 h1,

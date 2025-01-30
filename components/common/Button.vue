@@ -1,20 +1,12 @@
 <script setup lang="ts">
-const {
-  label,
-  mode = 'normal',
-  offset = 'left',
-} = defineProps<{
+const { label, mode = 'normal' } = defineProps<{
   label?: string | number
   mode?: 'normal' | 'round' | 'text'
-  offset?: 'left' | 'right'
 }>()
 </script>
 
 <template>
-  <button
-    :class="mode"
-    :style="mode === 'text' && `margin-${offset}: -0.75em`"
-  >
+  <button :class="mode">
     <slot></slot>
     <span v-if="label || label === 0">{{ label }}</span>
   </button>
@@ -35,6 +27,7 @@ button {
 
   height: 32px;
   padding-inline: 0.75em;
+  padding-block: 0;
   border: none;
   border-radius: 16px;
 
@@ -50,6 +43,14 @@ button {
     background-color: var(--color-disabele-back);
     cursor: not-allowed;
   }
+}
+
+.round {
+  display: flex;
+  justify-content: center;
+
+  width: 32px;
+  padding-inline: 0;
 }
 
 .text {

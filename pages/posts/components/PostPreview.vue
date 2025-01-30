@@ -3,7 +3,11 @@ import type { Post } from '../../../../shared/types'
 import { useDayjs } from '#dayjs'
 import { CommonButton, IconLike, IconChat } from '#components'
 import MarkDown from './MarkDown.vue'
-const { post } = defineProps<{ post: Post }>()
+
+const { post } = defineProps<{
+  post: Post
+  mode: 'preview' | 'post'
+}>()
 
 const time = computed(() => {
   const dayjs = useDayjs()
@@ -13,7 +17,11 @@ const time = computed(() => {
 </script>
 
 <template>
-  <article class="post-preview">
+  <article
+    @click="mode === 'preview' && $router.push(`/posts/${post.id}`)"
+    class="post-preview"
+    :class="mode === 'preview' && 'is-preview'"
+  >
     <header>
       <div class="img"></div>
       <span class="author">{{ post.author_id }}</span
@@ -47,6 +55,17 @@ const time = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  border-radius: 8px;
+  transition: 0.2s;
+
+  &.is-preview {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--color-preview-hover);
+    }
+  }
 }
 
 header {

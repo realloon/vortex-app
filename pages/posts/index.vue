@@ -35,7 +35,7 @@ const {
 
 <template>
   <menu type="toolbar">
-    <select name="date">
+    <select class="select" name="date">
       <option value="today">今日</option>
     </select>
     <CommonButton
@@ -50,13 +50,22 @@ const {
   <section>
     <ul class="posts-list">
       <li v-for="post in posts">
-        <PostPreview :post="post" :key="post.id" />
+        <PostPreview :post="post" mode="preview" :key="post.id" />
       </li>
     </ul>
   </section>
 </template>
 
 <style scoped>
+/* tmp */
+.select {
+  padding-inline: 1rem;
+  outline: none;
+  font-family: inherit;
+  font-size: 1rem;
+  border: 0;
+}
+
 select {
   color: var(--color-font);
   background-color: transparent;
@@ -66,12 +75,6 @@ menu {
   margin-block-end: 16px;
   display: flex;
   gap: 1em;
-
-  select {
-    font-family: inherit;
-    font-size: 1rem;
-    border: 0;
-  }
 
   ul {
     display: flex;
@@ -90,7 +93,7 @@ menu {
 .posts-list {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .active {
