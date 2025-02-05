@@ -13,7 +13,7 @@ const {
   try {
     const data = await $graphql.default.request<GraphQLResponse>(gql`
       {
-        getAllPosts {
+        getPosts {
           id
           author_id
           title
@@ -25,7 +25,7 @@ const {
         }
       }
     `)
-    return data.getAllPosts
+    return data.getPosts
   } catch (err) {
     console.error('GraphQL Error:', err)
     return []

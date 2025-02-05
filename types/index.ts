@@ -7,7 +7,8 @@ export interface Draft {
 }
 
 export interface GraphQLResponse {
-  getAllPosts: Post[]
+  getPosts: Post[]
   getPost: Post
   createPost: boolean
+  getComments: any[]
 }

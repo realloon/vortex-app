@@ -2,6 +2,10 @@
 import AppHeader from './components/AppHeader.vue'
 import AppAside from './components/AppAside.vue'
 import AppRight from './components/AppRight.vue'
+
+useSeoMeta({
+  title: 'Vortex - 边缘世界中文论坛',
+})
 </script>
 
 <template>

@@ -37,7 +37,7 @@ const isPreview = ref(false)
   border-radius: 4px;
   outline: 0 solid brown;
 
-  transition: 0.2s;
+  transition: 0.1s;
   &:has(textarea:focus) {
     outline-width: 2px;
   }
