@@ -51,6 +51,14 @@ function change(value: string) {
 <style scoped>
 .select {
   position: relative;
+  --bgc: #ffffff;
+  --hover: #e6ebee;
+  --shadow: ;
+
+  @media (prefers-color-scheme: dark) {
+    --bgc: #16181a;
+    --hover: #242629;
+  }
 }
 
 ul {
@@ -59,12 +67,14 @@ ul {
   left: 0;
 
   width: fit-content;
-  background-color: #16181a;
+  background-color: var(--bgc);
   border-radius: 8px;
+  box-shadow: 0px 4px 12px 1px #00000032;
 
   li {
     padding: 0.75rem 1rem;
     cursor: pointer;
+    transition: 0.2s;
 
     &:first-child {
       border-top-left-radius: 8px;
@@ -75,7 +85,7 @@ ul {
       border-bottom-right-radius: 8px;
     }
     &:hover {
-      background-color: #242629;
+      background-color: var(--hover);
     }
   }
 }

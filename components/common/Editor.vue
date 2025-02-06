@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { CommonButton, CommonTextarea } from '#components'
-import MarkDown from '~/pages/posts/components/MarkDown.vue'
+import { MarkDown, CommonButton, CommonTextarea } from '#components'
 
 const model = defineModel<string>({ required: true })
 
@@ -21,7 +20,7 @@ const isPreview = ref(false)
 
     <CommonTextarea v-bind="$attrs" v-if="!isPreview" v-model="model" />
 
-    <MarkDown v-else class="preview" :markdown="model" />
+    <MarkDown v-else class="preview" :content="model" />
   </div>
 </template>
 

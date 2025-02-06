@@ -2,11 +2,11 @@
 import { marked } from 'marked'
 // import DOMPurify from 'isomorphic-dompurify'
 
-const { markdown } = defineProps<{ markdown: string }>()
+const { content } = defineProps<{ content: string }>()
 
 const clean = ref('')
 watchEffect(() => {
-  const html = marked.parse(markdown)
+  const html = marked.parse(content)
   if (typeof html === 'string') {
     // clean.value = DOMPurify.sanitize(html)
     clean.value = html

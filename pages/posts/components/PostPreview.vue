@@ -1,19 +1,13 @@
 <script setup lang="ts">
 import type { Post } from '../../../../shared/types'
-import { useDayjs } from '#dayjs'
-import { CommonButton, IconLike, IconChat } from '#components'
-import MarkDown from './MarkDown.vue'
+// Components
+import { MarkDown, CommonButton, IconLike, IconChat } from '#components'
+import FeedHead from './FeedHead.vue'
 
 const { post } = defineProps<{
   post: Post
   mode: 'preview' | 'post'
 }>()
-
-const time = computed(() => {
-  const dayjs = useDayjs()
-  const updated = dayjs(post.updated_at)
-  return updated.add(8, 'hour').fromNow() // UTC+08:00
-})
 </script>
 
 <template>
@@ -22,21 +16,14 @@ const time = computed(() => {
     class="post-preview"
     :class="mode === 'preview' && 'is-preview'"
   >
-    <header>
-      <div class="img"></div>
-      <span class="author">{{ post.author_id }}</span
-      ><span>•</span
-      ><client-only
-        ><time :datetime="post.updated_at">{{ time }}</time></client-only
-      >
-    </header>
+    <FeedHead :author="post.author_id" :updated="post.updated_at" />
 
     <h2 class="title-wrapper">
       <span class="tag">Tag</span>
       <span>{{ post.title }}</span>
     </h2>
 
-    <MarkDown class="content" :markdown="post.content" />
+    <MarkDown class="content" :content="post.content" />
 
     <menu type="toolbar">
       <CommonButton :label="post.likes">

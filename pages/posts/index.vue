@@ -31,13 +31,19 @@ const {
     return []
   }
 })
+
+const sortBy = ref('today')
+const sortOptions = [{ label: '今日', value: 'today' }]
 </script>
 
 <template>
   <menu type="toolbar">
-    <select class="select" name="date">
-      <option value="today">今日</option>
-    </select>
+    <CommonSelect
+      style="margin-left: -0.75rem"
+      v-model="sortBy"
+      :options="sortOptions"
+    />
+
     <CommonButton
       @click="$router.push('/posts/editor')"
       class="create-btn"
