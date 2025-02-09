@@ -4,11 +4,10 @@ import { gql } from 'nuxt-graphql-request/utils'
 // Components
 import PostPreview from './components/PostPreview.vue'
 import Comment from './components/Comment.vue'
-import { CommonSelect, CommonEditor, CommonButton } from '#components'
+import CommnetEditor from './components/CommnetEditor.vue'
 
 const route = useRoute()
 const { $graphql } = useNuxtApp()
-
 const { data, status, error } = await useAsyncData(
   `post/${route.params.id}`,
   async () => {
@@ -63,19 +62,12 @@ const comment = ref('')
 
 <template>
   <section class="view">
-    <PostPreview v-if="post" :post="post" mode="post" />
+    <PostPreview v-if="post" :post="post" mode='detail' />
 
-    <!-- <form>
-      <CommonEditor v-model="comment" placeholder="添加一条评论" />
-      <CommonButton label="发表" />
-    </form> -->
+    <CommnetEditor v-model="comment" />
 
     <menu type="toolbar">
-      <CommonSelect
-        style="margin-left: -0.75em"
-        v-model="sortBy"
-        :options="sortOptions"
-      />
+      <CommonSelect v-model="sortBy" :options="sortOptions" mode="text" />
     </menu>
 
     <Comment v-for="comment in comments" :comment="comment" />
@@ -86,13 +78,6 @@ const comment = ref('')
 .view {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
   gap: 1rem;
 }
 </style>

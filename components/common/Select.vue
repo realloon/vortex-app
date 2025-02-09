@@ -6,8 +6,9 @@ interface Option {
   value: string
 }
 
-const { options } = defineProps<{
+const { options, mode = 'default' } = defineProps<{
   options: Option[]
+  mode?: 'default' | 'text'
 }>()
 
 const model = defineModel<string>({ required: true })
@@ -25,11 +26,11 @@ function change(value: string) {
 </script>
 
 <template>
-  <div class="select">
+  <div class="select" :class="mode === 'text' && 'offset'">
     <CommonButton
-      class="arrow"
-      @click="isOpen = !isOpen"
-      mode="text"
+      class="arrow-btn"
+      @click.prevent="isOpen = !isOpen"
+      :mode="mode"
       :label="label"
     >
       <IconArrow />
@@ -51,6 +52,11 @@ function change(value: string) {
 <style scoped>
 .select {
   position: relative;
+
+  &.offset {
+    margin-left: -0.75rem;
+  }
+
   --bgc: #ffffff;
   --hover: #e6ebee;
   --shadow: ;
@@ -90,8 +96,7 @@ ul {
   }
 }
 
-/* tmp */
-.arrow {
+.arrow-btn {
   flex-direction: row-reverse;
 
   svg {

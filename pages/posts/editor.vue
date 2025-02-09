@@ -1,12 +1,11 @@
 <script setup lang="ts">
 // Utils
 import debounce from '~/utils/debounce'
-// Components
-import { CommonButton, CommonInput, CommonEditor } from '#components'
 // Store
 import { useDraftStore } from '~/store/draftStore'
 const draftStore = useDraftStore()
 
+// init for store
 const title = ref(draftStore.draft.title)
 const content = ref(draftStore.draft.content)
 
@@ -17,13 +16,11 @@ const router = useRouter()
 async function createPost() {
   const codedTitle = encodeURIComponent(title.value)
   const codedContent = encodeURIComponent(content.value)
-  
+
   try {
     await $graphql.default.request(`
       mutation {
-        createPost(author_id: "0", title: "${codedTitle}", content: "${codedContent}") {
-          title
-        }
+        createPost(author_id: 1, title: "${codedTitle}", content: "${codedContent}")
       }
     `)
     draftStore.draft = { title: '', content: '', date: 0 }
@@ -51,8 +48,16 @@ function handleInput() {
 }
 
 function addDraftHistory() {
+  // TODO
   draftStore.draftHistory.push(draft.value)
 }
+
+const topic = ref('all')
+const topicOptions = [
+  { label: '综合', value: 'all' },
+  { label: '模组', value: 'mod' },
+  { label: '教程', value: 'tutorial' },
+]
 </script>
 
 <template>
@@ -63,11 +68,11 @@ function addDraftHistory() {
     </header>
 
     <form @submit.prevent="createPost">
-      <select name="topic">
-        <option value="all">综合</option>
-        <option value="mod">模组</option>
-        <option value="learn">教程</option>
-      </select>
+      <CommonSelect
+        v-model="topic"
+        :options="topicOptions"
+        name="topic"
+      />
 
       <div class="title-wrapper">
         <CommonInput

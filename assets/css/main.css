@@ -1,19 +1,26 @@
+@import url('./normalize.css');
+
 :root {
-  /* S color */
+  /* color */
   --color-font: #333;
   --color-lighter: #353d41;
   --color-page: #fff;
   --color-panel: #f6f8f9;
+
   --color-disabele-font: #b7b7b7;
   --color-disabele-back: #f3f3f3;
+
   --color-ctrl: #e6ebee;
   --color-ctrl-hover: #f6f8f9;
   --color-ctrl-active: #e6ebee;
+
   --color-preview-hover: var(--color-panel);
+
   /* Font */
   --font-size: 16px;
-  --font-wenkai: 'LXGW WenKai', sans-serif;
-  --font-mono: 'Monaco', monospace;
+  --font-sans: 'LXGW WenKai', ui-sans-serif, sans-serif;
+  --font-mono: 'Monaco', ui-monospace, monospace;
+
   /* Border */
   --border-base: 1px solid #eef0f4;
 
@@ -24,7 +31,8 @@
     --color-lighter: #bbc9d3;
     --color-page: #101214;
     --color-panel: #000;
-    --border-base: 1px solid #191b21;
+    /* --border-base: 1px solid #191b21; */
+    --border-base: 1px solid #404143;
     --color-disabele-font: #535456;
     --color-disabele-back: #1a1c1e;
     --color-ctrl: #242629;
@@ -35,43 +43,18 @@
 }
 
 body {
-  margin: 0;
   color: var(--color-font);
   background-color: var(--color-page);
 
-  font-family: var(--font-wenkai);
-  line-height: 1;
+  font-family: var(--font-sans);
 }
 
-article {
-  line-height: 1.5;
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  font-size: 1rem;
-  font-weight: normal;
-  margin-block: 0;
-}
-
-ul,
-ol {
-  padding-inline-start: 0;
-  margin-block: 0;
-  list-style: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: unset;
-}
-
-menu {
-  margin: 0;
-  padding-inline-start: 0;
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }

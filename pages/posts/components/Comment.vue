@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { Comment } from '../../../../shared/types'
 // Components
 import { MarkDown, CommonButton, IconChat, IconLike } from '#components'
 import FeedHead from './FeedHead.vue'
 
-const { comment } = defineProps<{ comment: any }>()
+const { comment } = defineProps<{ comment: Comment }>()
 </script>
 
 <template>

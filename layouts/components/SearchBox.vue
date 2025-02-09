@@ -36,9 +36,6 @@ input {
   color: var(--color-font);
   background-color: transparent;
   flex-grow: 1;
-
-  font-size: 1rem;
-  font-family: inherit;
 }
 
 button {

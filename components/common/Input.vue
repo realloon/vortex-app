@@ -8,10 +8,6 @@ const model = defineModel<string>()
 
 <style scoped>
 input {
-  font-size: inherit;
-  font-family: inherit;
-  line-height: 1.5;
-
   padding: 0.5rem 1rem;
   border: var(--border-base);
   border-radius: 4px;

@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  line-height: 1;
+}
+
+article {
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-block: 0;
+}
+
+ul,
+ol {
+  padding-inline-start: 0;
+  margin-block: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: unset;
+}
+
+menu {
+  margin: 0;
+  padding-inline-start: 0;
+}
+
+input,
+textarea {
+  line-height: 1.5;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+button {
+  font-family: inherit;
+}

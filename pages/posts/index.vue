@@ -38,11 +38,7 @@ const sortOptions = [{ label: '今日', value: 'today' }]
 
 <template>
   <menu type="toolbar">
-    <CommonSelect
-      style="margin-left: -0.75rem"
-      v-model="sortBy"
-      :options="sortOptions"
-    />
+    <CommonSelect v-model="sortBy" :options="sortOptions" mode="text" />
 
     <CommonButton
       @click="$router.push('/posts/editor')"
@@ -67,8 +63,7 @@ const sortOptions = [{ label: '今日', value: 'today' }]
 .select {
   padding-inline: 1rem;
   outline: none;
-  font-family: inherit;
-  font-size: 1rem;
+  font-size: inherit;
   border: 0;
 }
 

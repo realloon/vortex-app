@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const minHeight = 128
+const { minHeight = 128 } = defineProps<{ minHeight?: number }>()
 
 const model = defineModel<string>({ required: true })
 const textarea = useTemplateRef('textarea')
@@ -26,6 +26,7 @@ onMounted(() => {
     v-model="model"
     v-bind="$attrs"
     required
+    :style="`height: ${minHeight}px`"
   ></textarea>
 </template>
 
@@ -35,14 +36,8 @@ textarea {
   /* padding */
   outline: none;
 
-  font-size: 1rem;
-  line-height: 1.5;
-  font-family: inherit;
   color: var(--color-font);
   background-color: transparent;
-
-  /* init height */
-  height: 128px;
 
   resize: none;
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { label, mode = 'normal' } = defineProps<{
+const { label, mode = 'default' } = defineProps<{
   label?: string | number
-  mode?: 'normal' | 'round' | 'text'
+  mode?: 'default' | 'round' | 'text'
 }>()
 </script>
 
@@ -19,14 +19,12 @@ button {
   align-items: center;
   gap: 0.5em;
 
-  font-size: inherit;
   line-height: inherit;
-  font-family: inherit;
   color: var(--color-font);
   background-color: var(--color-ctrl);
 
   height: 32px;
-  padding-inline: 0.75em;
+  padding-inline: 0.75rem;
   padding-block: 0;
   border: none;
   border-radius: 16px;

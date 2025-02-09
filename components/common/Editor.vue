@@ -57,9 +57,7 @@ textarea {
   /* padding */
   outline: none;
 
-  font-size: 1rem;
   line-height: 1.5;
-  font-family: inherit;
   color: var(--color-font);
   background-color: transparent;
 
