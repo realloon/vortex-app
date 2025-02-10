@@ -1,11 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-  runtimeConfig: {
-    public: {
-      api: process.env.VITE_API_URL,
-    },
-  },
   devtools: { enabled: false },
   css: ['~/assets/css/main.css'],
   modules: [

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import IconSearch from '../../components/common/Search.vue'
 function serach() {
   console.log('wanna search')
 }
