@@ -60,8 +60,8 @@ function createComment() {} // TODO
   outline: 2px solid transparent;
   outline-offset: -1px;
   transition: 0.2s;
-  &:focus-within {
-    outline-color: brown;
+  &:has(textarea:focus) {
+    outline-color: var(--color-lighter);
   }
 }
 
