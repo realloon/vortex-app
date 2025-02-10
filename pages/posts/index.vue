@@ -1,30 +1,32 @@
 <script setup lang="ts">
 import type { GraphQLResponse } from '~/types'
-import { gql } from 'nuxt-graphql-request/utils'
 // Components
 import PostPreview from './components/PostPreview.vue'
-
+// GraphQL
+import { gql } from 'nuxt-graphql-request/utils'
 const { $graphql } = useNuxtApp()
+
 const {
   data: posts,
   status,
   error,
 } = await useAsyncData('posts', async () => {
-  try {
-    const data = await $graphql.default.request<GraphQLResponse>(gql`
-      {
-        getPosts {
-          id
-          author_id
-          title
-          content
-          views
-          replies
-          likes
-          updated_at
-        }
+  const doc = gql`
+    {
+      getPosts {
+        id
+        author_id
+        title
+        content
+        views
+        replies
+        likes
+        updated_at
       }
-    `)
+    }
+  `
+  try {
+    const data = await $graphql.default.request<GraphQLResponse>(doc)
     return data.getPosts
   } catch (err) {
     console.error('GraphQL Error:', err)

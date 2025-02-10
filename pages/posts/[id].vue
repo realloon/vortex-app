@@ -11,40 +11,38 @@ const { $graphql } = useNuxtApp()
 const { data, status, error } = await useAsyncData(
   `post/${route.params.id}`,
   async () => {
-    const query = gql`
-    {
-      getPost(id: ${route.params.id}) {
-        id
-        author_id
-        title
-        content
-        views
-        replies
-        likes
-        created_at
-        updated_at
+    const doc = gql`
+      {
+        getPost(id: ${route.params.id}) {
+          id
+          author_id
+          title
+          content
+          views
+          replies
+          likes
+          created_at
+          updated_at
+        }
+        getComments(post_id: ${route.params.id}) {
+          author_id
+          content
+          created_at
+          updated_at
+        }
       }
-      getComments(post_id: ${route.params.id}) {
-        author_id
-        content
-        created_at
-        updated_at
-      }
-    }
-  `
+    `
 
     try {
-      const data = await $graphql.default.request<GraphQLResponse>(query)
-
-      return { post: data.getPost, comments: data.getComments }
+      return await $graphql.default.request<GraphQLResponse>(doc)
     } catch (err) {
       console.error('GraphQL Error:', err)
     }
   }
 )
 
-const post = computed(() => data.value?.post)
-const comments = computed(() => data.value?.comments)
+const post = computed(() => data.value?.getPost)
+const comments = computed(() => data.value?.getComments)
 
 useSeoMeta({
   title: () => post.value?.title ?? 'Vortex',
@@ -62,7 +60,7 @@ const comment = ref('')
 
 <template>
   <section class="view">
-    <PostPreview v-if="post" :post="post" mode='detail' />
+    <PostPreview v-if="post" :post="post" mode="detail" />
 
     <CommnetEditor v-model="comment" />
 
