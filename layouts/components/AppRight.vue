@@ -40,13 +40,13 @@ aside {
 
   flex-direction: column;
 
-  & > .card:not(:last-child) {
-    border-bottom: var(--border-base);
-  }
-
   display: none;
   @media screen and (min-width: 768px) {
     display: flex;
+  }
+
+  & > .card:not(:last-child) {
+    border-bottom: var(--border-base);
   }
 }
 

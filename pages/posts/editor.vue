@@ -92,12 +92,13 @@ const topicOptions = [
 
       <footer>
         <Transition>
-          <span :class="isSaved && 'is-saved'">已存草稿</span>
+          <span v-show="isSaved">已存草稿</span>
         </Transition>
         <CommonButton
           @click.prevent="addDraftHistory"
           label="另存草稿"
           :disabled="!isComplated"
+          style="margin-left: auto"
         />
         <CommonButton
           label="发布"
@@ -152,15 +153,5 @@ footer {
   display: flex;
   align-items: center;
   gap: 1rem;
-
-  span {
-    flex-grow: 1;
-
-    transition: 0.4s;
-    opacity: 0;
-    &.is-saved {
-      opacity: 1;
-    }
-  }
 }
 </style>

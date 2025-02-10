@@ -101,6 +101,6 @@ menu {
 
 .active {
   font-weight: bold;
-  color: brown;
+  color: var(--color-primary);
 }
 </style>

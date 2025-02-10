@@ -91,7 +91,7 @@ menu {
 .img {
   width: 24px;
   height: 24px;
-  background-color: brown;
+  background-color: var(--color-primary);
   border-radius: 50%;
 }
 </style>

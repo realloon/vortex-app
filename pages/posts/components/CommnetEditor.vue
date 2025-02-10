@@ -22,8 +22,9 @@ function createComment() {} // TODO
     <span @click="expand" class="placeholder" :hidden="isExpanded">
       {{ placeholder }}
     </span>
-    <!-- :class="isExpanded && 'is-hidden'" -->
+
     <form
+      @click.stop="textarea?.focus()"
       @submit.prevent="createComment"
       :class="!isExpanded && 'is-hidden'"
     >
@@ -58,10 +59,10 @@ function createComment() {} // TODO
   border-radius: 1.25rem; /* calced */
 
   outline: 2px solid transparent;
-  outline-offset: -1px;
+  outline-offset: -2px;
   transition: 0.2s;
   &:has(textarea:focus) {
-    outline-color: var(--color-lighter);
+    outline-color: var(--color-primary);
   }
 }
 

@@ -2,16 +2,22 @@
 const {
   label,
   mode = 'default',
+  size = 'default',
+  center = false,
   disabled = false,
 } = defineProps<{
   label?: string | number
   mode?: 'default' | 'round' | 'text'
+  size?: 'default' | 'huge'
+  center?: boolean
   disabled?: boolean
 }>()
 </script>
 
 <template>
-  <button :class="[mode, disabled && 'is-disabled']">
+  <button
+    :class="[mode, size, center && 'is-center', disabled && 'is-disabled']"
+  >
     <slot></slot>
     <span v-if="label || label === 0">{{ label }}</span>
   </button>
@@ -31,20 +37,28 @@ button {
   height: 32px;
   padding-inline: 0.75rem;
   padding-block: 0;
-  border: none;
+  border: var(--border-base);
   border-radius: 16px;
 
   cursor: pointer;
   transition: 0.4s;
 
-  &:not(.is-disabled):hover {
-    background-color: var(--color-ctrl-active);
-  }
-
   &.is-disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  &:not(.is-disabled):hover {
+    background-color: var(--color-ctrl-active);
+  }
+}
+
+.is-center {
+  justify-content: center;
+}
+
+.huge {
+  height: 40px;
 }
 
 .round {
@@ -58,6 +72,7 @@ button {
 .text {
   color: var(--color-font);
   background-color: transparent;
+  border: none;
   &:hover {
     background-color: #e6ebee;
   }

@@ -1,49 +1,15 @@
 @import url('./normalize.css');
-
-:root {
-  /* color */
-  --color-font: #333;
-  --color-lighter: #353d41;
-  --color-page: #fff;
-  --color-panel: #f6f8f9;
-
-  --color-ctrl: #e6ebee;
-  --color-ctrl-hover: #f6f8f9;
-  --color-ctrl-active: #e6ebee;
-
-  --color-preview-hover: var(--color-panel);
-
-  /* Font */
-  --font-size: 16px;
-  --font-sans: 'LXGW WenKai', ui-sans-serif, sans-serif;
-  --font-mono: 'Monaco', ui-monospace, monospace;
-
-  /* Border */
-  --border-base: 1px solid #eef0f4;
-
-  font-size: var(--font-size);
-
-  @media (prefers-color-scheme: dark) {
-    --color-font: #fff;
-    --color-lighter: #bbc9d3;
-    --color-page: #101214;
-    --color-panel: #000;
-    /* --border-base: 1px solid #191b21; */
-    --border-base: 1px solid #404143;
-    --color-ctrl: #242629;
-    --color-ctrl-hover: #191c1f;
-    --color-ctrl-active: #2c3236;
-    --color-preview-hover: #1b1d1f;
-  }
-}
+@import url('./variables.css');
 
 body {
   color: var(--color-font);
   background-color: var(--color-page);
 
   font-family: var(--font-sans);
+  font-size: var(--font-size);
 }
 
+/* Transition */
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;

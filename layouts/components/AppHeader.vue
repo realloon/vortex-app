@@ -6,7 +6,7 @@ import SearchBox from './SearchBox.vue'
   <header>
     <h1>Vortex</h1>
     <SearchBox />
-    <div class="avatar"></div>
+    <div @click="$router.push('/login')" class="avatar"></div>
   </header>
 </template>
 
@@ -39,6 +39,7 @@ h1 {
   height: 32px;
   border: var(--border-base);
   border-radius: 50%;
-  background-color: brown;
+  background-color: var(--color-primary);
+  cursor: pointer;
 }
 </style>
