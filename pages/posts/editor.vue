@@ -68,11 +68,7 @@ const topicOptions = [
     </header>
 
     <form @submit.prevent="createPost">
-      <CommonSelect
-        v-model="topic"
-        :options="topicOptions"
-        name="topic"
-      />
+      <CommonSelect v-model="topic" :options="topicOptions" name="topic" />
 
       <div class="title-wrapper">
         <CommonInput

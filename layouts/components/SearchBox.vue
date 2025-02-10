@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconSearch from '../../components/common/Search.vue'
 function serach() {
   console.log('wanna search')
 }
@@ -6,8 +7,10 @@ function serach() {
 
 <template>
   <form @submit.prevent="serach" role="search">
-    <input type="search" placeholder="搜索" name="search" />
-    <button type="submit">🔍</button>
+    <button type="submit">
+      <IconSearch />
+    </button>
+    <input type="search" required placeholder="搜索" name="search" />
   </form>
 </template>
 
@@ -15,6 +18,7 @@ function serach() {
 form {
   box-sizing: border-box;
   display: flex;
+  gap: 0.5rem;
 
   height: 32px;
   padding-inline: 14px;
@@ -42,5 +46,6 @@ button {
   padding: 0;
   border: none;
   background-color: transparent;
+  opacity: 0.5;
 }
 </style>

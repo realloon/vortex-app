@@ -1,12 +1,17 @@
 <script setup lang="ts">
-const { label, mode = 'default' } = defineProps<{
+const {
+  label,
+  mode = 'default',
+  disabled = false,
+} = defineProps<{
   label?: string | number
   mode?: 'default' | 'round' | 'text'
+  disabled?: boolean
 }>()
 </script>
 
 <template>
-  <button :class="mode">
+  <button :class="[mode, disabled && 'is-disabled']">
     <slot></slot>
     <span v-if="label || label === 0">{{ label }}</span>
   </button>
@@ -32,11 +37,11 @@ button {
   cursor: pointer;
   transition: 0.4s;
 
-  &:not([disabled]):hover {
+  &:not(.is-disabled):hover {
     background-color: var(--color-ctrl-active);
   }
 
-  &[disabled] {
+  &.is-disabled {
     color: var(--color-disabele-font);
     background-color: var(--color-disabele-back);
     cursor: not-allowed;

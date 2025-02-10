@@ -19,7 +19,7 @@ const topicNav = [
 </script>
 
 <template>
-  <aside>
+  <aside class="app-aside">
     <nav>
       <ul>
         <li>
@@ -39,7 +39,7 @@ const topicNav = [
 </template>
 
 <style scoped>
-aside {
+.app-aside {
   position: sticky;
   top: 49px;
 

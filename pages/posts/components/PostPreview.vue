@@ -7,7 +7,6 @@ import FeedHead from './FeedHead.vue'
 const { post } = defineProps<{
   post: Post
   mode: 'preview' | 'detail'
-  handleReply?: (...args: any[]) => void
 }>()
 </script>
 
@@ -30,7 +29,7 @@ const { post } = defineProps<{
       <CommonButton :label="post.likes">
         <IconLike />
       </CommonButton>
-      <CommonButton @click="handleReply" :label="post.replies">
+      <CommonButton :label="post.replies">
         <IconChat />
       </CommonButton>
       <span>浏览：{{ post.views }}</span>
