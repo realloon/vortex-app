@@ -7,9 +7,6 @@
   --color-page: #fff;
   --color-panel: #f6f8f9;
 
-  --color-disabele-font: #b7b7b7;
-  --color-disabele-back: #f3f3f3;
-
   --color-ctrl: #e6ebee;
   --color-ctrl-hover: #f6f8f9;
   --color-ctrl-active: #e6ebee;
@@ -33,8 +30,6 @@
     --color-panel: #000;
     /* --border-base: 1px solid #191b21; */
     --border-base: 1px solid #404143;
-    --color-disabele-font: #535456;
-    --color-disabele-back: #1a1c1e;
     --color-ctrl: #242629;
     --color-ctrl-hover: #191c1f;
     --color-ctrl-active: #2c3236;

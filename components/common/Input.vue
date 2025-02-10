@@ -3,7 +3,7 @@ const model = defineModel<string>()
 </script>
 
 <template>
-  <input v-model="model" type="text" />
+  <input v-model.trim="model" type="text" />
 </template>
 
 <style scoped>

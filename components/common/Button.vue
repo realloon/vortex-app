@@ -42,8 +42,7 @@ button {
   }
 
   &.is-disabled {
-    color: var(--color-disabele-font);
-    background-color: var(--color-disabele-back);
+    opacity: 0.5;
     cursor: not-allowed;
   }
 }

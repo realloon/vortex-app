@@ -7,21 +7,28 @@ const comment = defineModel<string>({ required: true })
 
 const isExpanded = ref(false)
 
+const textarea = useTemplateRef('textarea')
+
+function expand() {
+  isExpanded.value = true
+  textarea.value?.focus()
+}
+
 function createComment() {} // TODO
 </script>
 
 <template>
   <div class="comment-editor">
-    <span
-      @click="isExpanded = true"
-      v-show="!isExpanded"
-      class="placeholder"
-    >
+    <span @click="expand" class="placeholder" :hidden="isExpanded">
       {{ placeholder }}
     </span>
-
-    <form @submit.prevent="createComment" v-show="isExpanded">
+    <!-- :class="isExpanded && 'is-hidden'" -->
+    <form
+      @submit.prevent="createComment"
+      :class="!isExpanded && 'is-hidden'"
+    >
       <CommonTextarea
+        ref="textarea"
         v-model="comment"
         :placeholder="placeholder"
         :min-height="48"
@@ -34,7 +41,7 @@ function createComment() {} // TODO
           @click="isExpanded = false"
           label="收起"
         />
-        <CommonButton label="发布">
+        <CommonButton label="发布" :disabled="comment === ''">
           <IconSeed />
         </CommonButton>
       </menu>
@@ -47,8 +54,15 @@ function createComment() {} // TODO
   display: flex;
   flex-direction: column;
 
-  outline: var(--border-base);
+  border: var(--border-base);
   border-radius: 1.25rem; /* calced */
+
+  outline: 2px solid transparent;
+  outline-offset: -1px;
+  transition: 0.2s;
+  &:focus-within {
+    outline-color: brown;
+  }
 }
 
 .placeholder {
@@ -62,6 +76,15 @@ form {
   display: flex;
   flex-direction: column;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
+
+  &.is-hidden {
+    height: 0;
+    padding: 0;
+
+    .toolbar {
+      display: none;
+    }
+  }
 
   textarea {
     color: var(--color-font);
