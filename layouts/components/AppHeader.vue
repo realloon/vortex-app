@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import SearchBox from './SearchBox.vue'
+
+const login = useTemplateRef('login')
+
+function showLogin() {
+  login.value?.showLogin()
+}
 </script>
 
 <template>
   <header>
     <h1>Vortex</h1>
     <SearchBox />
-    <div @click="$router.push('/login')" class="avatar"></div>
+    <div @click="showLogin" class="avatar"></div>
   </header>
+  <Login ref="login" />
 </template>
 
 <style scoped>

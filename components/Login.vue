@@ -1,14 +1,16 @@
 <script setup lang="ts">
 const dialog = useTemplateRef('dialog')
 
+const minLength = 8
+
 const email = ref('')
 const password = ref('')
 
-const minLength = 8
-
-onMounted(() => {
+function showLogin() {
   dialog.value?.showModal()
-})
+}
+
+defineExpose({ showLogin })
 
 function submit(e: Event) {
   if (!email.value || password.value.length < minLength) {
@@ -75,7 +77,7 @@ dialog {
 }
 
 ::backdrop {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 h1 {
