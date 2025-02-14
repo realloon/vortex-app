@@ -6,8 +6,8 @@ import { useDraftStore } from '~/store/draftStore'
 const draftStore = useDraftStore()
 
 // init for store
-const title = ref(draftStore.draft.title)
-const content = ref(draftStore.draft.content)
+const title = ref(draftStore.postDraft.title)
+const content = ref(draftStore.postDraft.content)
 
 const isComplated = computed(() => title.value.length > 2 && content.value)
 
@@ -23,7 +23,7 @@ async function createPost() {
         createPost(author_id: 1, title: "${codedTitle}", content: "${codedContent}")
       }
     `)
-    draftStore.draft = { title: '', content: '', date: 0 }
+    draftStore.postDraft = { title: '', content: '', date: 0 }
     router.push('/posts')
   } catch (err) {
     console.error(err)
@@ -39,7 +39,7 @@ const draft = computed(() => ({
 const isSaved = ref(false)
 
 const saveDraft = debounce(() => {
-  draftStore.draft = draft.value
+  draftStore.postDraft = draft.value
   isSaved.value = true
 })
 function handleInput() {
@@ -49,7 +49,7 @@ function handleInput() {
 
 function addDraftHistory() {
   // TODO
-  draftStore.draftHistory.push(draft.value)
+  draftStore.postDraftHistory.push(draft.value)
 }
 
 const topic = ref('all')

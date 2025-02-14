@@ -5,7 +5,6 @@ const model = defineModel<string>({ required: true })
 const textarea = useTemplateRef('textarea')
 
 function focus() {
-  console.log('执行获取焦点')
   textarea.value?.focus()
 }
 
@@ -40,7 +39,6 @@ onMounted(() => {
 <style scoped>
 textarea {
   border: none;
-  /* padding */
   outline: none;
 
   color: var(--color-font);

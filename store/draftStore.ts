@@ -1,17 +1,28 @@
-import type { Draft } from '~/types'
 import { defineStore } from 'pinia'
+
+type PostDraft = {
+  title: string
+  content: string
+  date: number
+}
+
+type CommentDraft = Omit<PostDraft, 'title'>
 
 export const useDraftStore = defineStore(
   'draft',
   () => {
-    const draft = ref<Draft>({
-      title: '',
-      content: '',
-      date: 0,
-    })
-    const draftHistory = ref<Array<Draft>>([])
+    const postDraft = ref<PostDraft>({ title: '', content: '', date: 0 })
+    const postDraftHistory = ref<PostDraft[]>([])
 
-    return { draft, draftHistory }
+    const commentDraft = ref<CommentDraft>({ content: '', date: 0 })
+    const commentDraftHistory = ref<CommentDraft[]>([])
+
+    return {
+      postDraft,
+      postDraftHistory,
+      commentDraft,
+      commentDraftHistory,
+    }
   },
   {
     persist: true,

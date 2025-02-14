@@ -1,9 +1,12 @@
 <script setup lang="ts">
-const { placeholder = '回复帖子' } = defineProps<{
-  placeholder?: string
-}>()
+import type { GraphQLResponse } from '~/types'
 
 const comment = defineModel<string>({ required: true })
+
+const { postId, placeholder = '回复帖子' } = defineProps<{
+  postId: string
+  placeholder?: string
+}>()
 
 const isExpanded = ref(false)
 
@@ -14,7 +17,23 @@ function expand() {
   textarea.value?.focus()
 }
 
-function createComment() {} // TODO
+const { $graphql } = useNuxtApp()
+async function submit() {
+  try {
+    const { createComment } = await $graphql.default
+      .request<GraphQLResponse>(`
+        mutation {
+        createComment(post_id: ${postId}, author_id: 1, content: "${comment.value}")
+      }`)
+
+    if (!createComment) return console.error('发表评论失败')
+
+    comment.value = ''
+    isExpanded.value = false
+  } catch (err) {
+    console.error(err)
+  }
+}
 </script>
 
 <template>
@@ -25,7 +44,7 @@ function createComment() {} // TODO
 
     <form
       @click.stop="textarea?.focus()"
-      @submit.prevent="createComment"
+      @submit.prevent="submit"
       :class="!isExpanded && 'is-hidden'"
     >
       <CommonTextarea
@@ -39,10 +58,10 @@ function createComment() {} // TODO
       <menu class="toolbar" type="toolbar">
         <CommonButton
           type="button"
-          @click="isExpanded = false"
+          @click.stop="isExpanded = false"
           label="收起"
         />
-        <CommonButton label="发布" :disabled="comment === ''">
+        <CommonButton @click.stop label="发布" :disabled="comment === ''">
           <IconSeed />
         </CommonButton>
       </menu>
