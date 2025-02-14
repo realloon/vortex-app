@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { GraphQLResponse } from '~/types'
+import { useUserStore } from '~/store/userStore'
+const userStore = useUserStore()
+
 const dialog = useTemplateRef('dialog')
 
 const minLength = 8
@@ -6,15 +10,39 @@ const minLength = 8
 const email = ref('')
 const password = ref('')
 
+const isValidated = computed(
+  () => email.value && password.value.length >= minLength
+)
+
 function showLogin() {
   dialog.value?.showModal()
 }
 
 defineExpose({ showLogin })
 
-function submit(e: Event) {
-  if (!email.value || password.value.length < minLength) {
+const { $graphql } = useNuxtApp()
+async function submit(e: Event) {
+  if (!isValidated.value) {
     return e.preventDefault()
+  }
+
+  try {
+    const {
+      createUser: { accessToken, refreshToken },
+    } = await $graphql.default.request<GraphQLResponse>(`
+      mutation {
+        createUser(email: "${email.value}", password: "${password.value}") {
+          accessToken
+          refreshToken
+        }
+      }`)
+
+    console.log({ accessToken, refreshToken })
+
+    // userStore.token = token
+    console.log('update token')
+  } catch (err) {
+    console.error(err)
   }
 }
 </script>
@@ -37,6 +65,7 @@ function submit(e: Event) {
         autocomplete="email"
         name="email"
       />
+
       <CommonInput
         v-model="password"
         label="密码"
@@ -47,7 +76,9 @@ function submit(e: Event) {
         autocomplete="new-password"
         name="password"
       />
-      <p class="lighter">已有账户了吗？<span class="link">登陆</span></p>
+
+      <p class="lighter">若账号不存在将自动创建</p>
+
       <CommonButton label="注册" size="huge" center>
         <IconSeed />
       </CommonButton>

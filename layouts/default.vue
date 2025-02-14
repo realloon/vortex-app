@@ -2,10 +2,18 @@
 import AppHeader from './components/AppHeader.vue'
 import AppAside from './components/AppAside.vue'
 import AppRight from './components/AppRight.vue'
+// Store
+import { useUserStore } from '~/store/userStore'
 
 useSeoMeta({
   title: 'Vortex - 边缘世界中文论坛',
 })
+
+const { $graphql } = useNuxtApp()
+$graphql.default.setHeader(
+  'Authorization',
+  `Bearer ${useUserStore().token}`
+)
 </script>
 
 <template>
