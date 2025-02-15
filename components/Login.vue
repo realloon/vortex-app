@@ -10,10 +10,6 @@ const minLength = 8
 const email = ref('')
 const password = ref('')
 
-const isValidated = computed(
-  () => email.value && password.value.length >= minLength
-)
-
 function showLogin() {
   dialog.value?.showModal()
 }
@@ -22,25 +18,17 @@ defineExpose({ showLogin })
 
 const { $graphql } = useNuxtApp()
 async function submit(e: Event) {
-  if (!isValidated.value) {
-    return e.preventDefault()
+  if (email.value && password.value) {
+    return e.preventDefault() // keep login panel
   }
 
   try {
-    const {
-      createUser: { accessToken, refreshToken },
-    } = await $graphql.default.request<GraphQLResponse>(`
+    const { createUser: token } = await $graphql.default
+      .request<GraphQLResponse>(`
       mutation {
-        createUser(email: "${email.value}", password: "${password.value}") {
-          accessToken
-          refreshToken
-        }
+        createUser(email: "${email.value}", password: "${password.value}") 
       }`)
-
-    console.log({ accessToken, refreshToken })
-
-    // userStore.token = token
-    console.log('update token')
+    userStore.token = token
   } catch (err) {
     console.error(err)
   }
@@ -49,7 +37,7 @@ async function submit(e: Event) {
 
 <template>
   <dialog ref="dialog">
-    <h1>注册</h1>
+    <h1>欢迎</h1>
     <p>加入边缘世界中文论坛，融入联系。</p>
     <p class="lighter">
       若继续，则表示您认可本网站的<span class="link">隐私政策</span>。
@@ -58,8 +46,8 @@ async function submit(e: Event) {
     <form method="dialog" @submit="submit">
       <CommonInput
         v-model="email"
-        label="邮箱"
-        placeholder="邮箱"
+        label="邮箱："
+        placeholder="该邮箱将作为您的登陆凭证"
         required
         type="email"
         autocomplete="email"
@@ -68,8 +56,8 @@ async function submit(e: Event) {
 
       <CommonInput
         v-model="password"
-        label="密码"
-        placeholder="密码"
+        label="密码："
+        placeholder="请用系统或浏览器生成强密码"
         required
         :minlength="minLength"
         type="password"
@@ -77,7 +65,7 @@ async function submit(e: Event) {
         name="password"
       />
 
-      <p class="lighter">若账号不存在将自动创建</p>
+      <p class="note lighter">若账号不存在将自动创建</p>
 
       <CommonButton label="注册" size="huge" center>
         <IconSeed />
@@ -91,7 +79,7 @@ dialog {
   line-height: 1.5;
 
   color: var(--color-font);
-  background-color: #191c1f;
+  background-color: #ffffff;
 
   box-sizing: border-box;
   width: 100%;
@@ -102,13 +90,17 @@ dialog {
   border-radius: 16px;
   box-shadow: #00000026 0px 1px 4px 0px, #00000026 0px 4px 4px 0px;
 
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #191c1f;
+  }
+
   @media screen and (min-width: 768px) {
     padding-inline: 80px;
   }
-}
-
-::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 h1 {
@@ -123,8 +115,7 @@ h1 {
 form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-
+  gap: 0.5rem;
   margin-block-start: 16px;
 }
 

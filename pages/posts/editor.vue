@@ -12,7 +12,6 @@ const content = ref(draftStore.postDraft.content)
 const isComplated = computed(() => title.value.length > 2 && content.value)
 
 const { $graphql } = useNuxtApp()
-const router = useRouter()
 async function createPost() {
   const codedTitle = encodeURIComponent(title.value)
   const codedContent = encodeURIComponent(content.value)
@@ -23,8 +22,8 @@ async function createPost() {
         createPost(author_id: 1, title: "${codedTitle}", content: "${codedContent}")
       }
     `)
-    draftStore.postDraft = { title: '', content: '', date: 0 }
-    router.push('/posts')
+    draftStore.clearPostDraft()
+    navigateTo('/posts')
   } catch (err) {
     console.error(err)
   }

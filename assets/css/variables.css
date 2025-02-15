@@ -1,6 +1,7 @@
 :root {
   /* color */
   --color-primary: #2960c7;
+  --color-error: #f44336;
   --color-font: #333;
   --color-lighter: #353d41;
   --color-page: #fff;

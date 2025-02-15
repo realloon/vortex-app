@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from '#app'
 import emitter from '~/utils/emitter'
 import { IconArrow } from '#components'
 
@@ -16,9 +15,8 @@ const {
   mode?: 'route' | 'mitt'
 }>()
 
-const router = useRouter()
 function to(path: string) {
-  mode === 'route' ? router.push(path) : emitter.emit('route', path)
+  mode === 'route' ? navigateTo(path) : emitter.emit('route', path)
 }
 
 const isOpen = ref(true)
