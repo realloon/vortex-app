@@ -40,7 +40,11 @@ async function submit(e: Event) {
     <h1>欢迎</h1>
     <p>加入边缘世界中文论坛，融入联系。</p>
     <p class="lighter">
-      若继续，则表示您认可本网站的<span class="link">隐私政策</span>。
+      若继续，则表示您认可本网站的<span
+        @click="navigateTo('policy', { open: { target: '_blank' } })"
+        class="link"
+        >隐私政策</span
+      >。
     </p>
 
     <form method="dialog" @submit="submit">
