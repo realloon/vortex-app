@@ -3,9 +3,14 @@ import type { GraphQLResponse } from '~/types'
 
 const comment = defineModel<string>({ required: true })
 
-const { postId, placeholder = '回复帖子' } = defineProps<{
+const {
+  postId,
+  placeholder = '回复帖子',
+  refresh,
+} = defineProps<{
   postId: string
   placeholder?: string
+  refresh: () => Promise<void>
 }>()
 
 const isExpanded = ref(false)
@@ -30,6 +35,8 @@ async function submit() {
 
     comment.value = ''
     isExpanded.value = false
+
+    refresh && refresh()
   } catch (err) {
     console.error(err)
   }

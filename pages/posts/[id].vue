@@ -7,14 +7,12 @@ import PostPreview from './components/PostPreview.vue'
 import CommentCard from './components/CommentCard.vue'
 import CommentEditor from './components/CommentEditor.vue'
 
-const comments = ref<Comment[]>([])
-
 const route = useRoute()
 const { $graphql } = useNuxtApp()
-const { data, status, error } = await useAsyncData(
+const { data, status, error, refresh } = await useAsyncData(
   `post/${route.params.id}`,
   async () => {
-    const doc = gql`
+    const query = gql`
       {
         getPost(id: ${route.params.id}) {
           id
@@ -37,14 +35,19 @@ const { data, status, error } = await useAsyncData(
     `
 
     try {
-      return await $graphql.default.request<GraphQLResponse>(doc)
+      const res = await $graphql.default.request<GraphQLResponse>(query)
+      return {
+        post: res.getPost,
+        comments: res.getComments,
+      }
     } catch (err) {
       console.error('GraphQL Error:', err)
     }
   }
 )
-comments.value = data.value!.getComments
-const post = computed(() => data.value!.getPost)
+
+const post = computed(() => data.value!.post)
+const comments = computed(() => data.value!.comments)
 
 useSeoMeta({
   title: () => post.value.title,
@@ -58,20 +61,6 @@ const sortOptions = [
 ]
 
 const comment = ref('')
-
-async function updateComments() {
-  const { getComments } = await $graphql.default.request<GraphQLResponse>(`
-  {
-    getComments(post_id: ${route.params.id}) {
-      author_id
-      content
-      created_at
-      updated_at
-    }
-  }`)
-
-  comments.value = getComments
-}
 </script>
 
 <template>
@@ -79,9 +68,9 @@ async function updateComments() {
     <PostPreview v-if="post" :post="post" mode="detail" />
 
     <CommentEditor
-      @submit="updateComments"
       v-model="comment"
       :post-id="post.id"
+      :refresh="refresh"
     />
 
     <menu type="toolbar">

@@ -18,8 +18,11 @@ defineExpose({ showLogin })
 
 const { $graphql } = useNuxtApp()
 async function submit(e: Event) {
+  console.log('wanna login')
+
   if (email.value && password.value) {
-    return e.preventDefault() // keep login panel
+    e.preventDefault() // keep login panel
+    return
   }
 
   try {
@@ -28,6 +31,8 @@ async function submit(e: Event) {
       mutation {
         createUser(email: "${email.value}", password: "${password.value}") 
       }`)
+    console.log(token)
+
     userStore.token = token
   } catch (err) {
     console.error(err)
@@ -71,7 +76,7 @@ async function submit(e: Event) {
 
       <p class="note lighter">若账号不存在将自动创建</p>
 
-      <CommonButton label="注册" size="huge" center>
+      <CommonButton @click="submit" label="注册" size="huge" center>
         <IconSeed />
       </CommonButton>
     </form>
