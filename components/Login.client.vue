@@ -18,20 +18,23 @@ defineExpose({ showLogin })
 
 const { $graphql } = useNuxtApp()
 async function submit(e: Event) {
-  console.log('wanna login')
-
-  if (email.value && password.value) {
-    e.preventDefault() // keep login panel
+  if (!email.value || !password.value) {
+    console.error('Invalid value.')
     return
   }
 
   try {
+    // TODO: need login method.
+    // Check email:
+    //   If present, login, verify password, return token;
+    //   If absent, register, save to DB, return token.
+    // Should be done on server.
     const { createUser: token } = await $graphql.default
-      .request<GraphQLResponse>(`
-      mutation {
-        createUser(email: "${email.value}", password: "${password.value}") 
-      }`)
-    console.log(token)
+      .request<GraphQLResponse>(` 
+        mutation {
+          createUser(email: "${email.value}", password: "${password.value}") 
+        }
+      `)
 
     userStore.token = token
   } catch (err) {
@@ -52,7 +55,7 @@ async function submit(e: Event) {
       >。
     </p>
 
-    <form method="dialog" @submit="submit">
+    <form method="dialog" @submit.prevent="submit">
       <CommonInput
         v-model="email"
         label="邮箱："
@@ -74,7 +77,7 @@ async function submit(e: Event) {
         name="password"
       />
 
-      <p class="note lighter">若账号不存在将自动创建</p>
+      <p class="lighter">若账号不存在将自动创建</p>
 
       <CommonButton @click="submit" label="注册" size="huge" center>
         <IconSeed />

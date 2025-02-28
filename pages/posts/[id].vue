@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Comment } from '../../../shared/types'
 import type { GraphQLResponse } from '~/types'
 import { gql } from 'nuxt-graphql-request/utils'
 // Components

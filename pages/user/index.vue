@@ -10,7 +10,7 @@ const {
 } = await useAsyncData('profile', async () => {
   const res = await $graphql.default.request<GraphQLResponse>(`
     query {
-      getUserWithAuth {
+      getUserByAuth {
         id
         name
         email
@@ -21,10 +21,10 @@ const {
     }
   `)
 
-  return res.getUserWithAuth
+  return res.getUserByAuth
 })
 
-const name = ref('李真')
+const name = ref('whh')
 async function updateName() {
   const { updateUser: updated } = await $graphql.default
     .request<GraphQLResponse>(`
@@ -39,11 +39,12 @@ async function updateName() {
 </script>
 
 <template>
-  <h1>{{ user?.name }}</h1>
+  <h1>User Space</h1>
   <hr />
-  <h2>data</h2>
-  <pre>{{ user }}</pre>
+  <p>User Name: {{ user?.name }}</p>
 
-  <input type="text" v-model="name" />
-  <button @click="updateName">更新用户名</button>
+  <form @submit.prevent="updateName">
+    <input type="text" v-model="name" />
+    <button>更新用户名</button>
+  </form>
 </template>

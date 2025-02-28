@@ -2,7 +2,7 @@ import type { User, Post, Comment } from '../../shared/types'
 
 export interface GraphQLResponse {
   createUser: string
-  getUserWithAuth: User
+  getUserByAuth: User
   updateUser: boolean
   getPosts: Post[]
   getPost: Post

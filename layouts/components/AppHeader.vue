@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import LoginClient from '~/components/Login.client.vue'
 import SearchBox from './SearchBox.vue'
 import { useUserStore } from '~/store/userStore'
 const userStore = useUserStore()
 
 const login = useTemplateRef('login')
-
 function showLogin() {
-  userStore.token ? navigateTo('/profile') : login.value?.showLogin()
+  userStore.token ? navigateTo('/user') : login.value?.showLogin()
 }
 </script>
 
@@ -17,7 +17,7 @@ function showLogin() {
     <div @click="showLogin" class="avatar"></div>
   </header>
   <!-- model -->
-  <Login ref="login" />
+  <LoginClient ref="login" />
 </template>
 
 <style scoped>
