@@ -33,16 +33,18 @@ aside {
   top: calc(49px + 1rem);
 
   background-color: var(--color-panel);
-  flex-basis: 320px;
-  flex-shrink: 0;
-  margin-right: 16px;
+
   border-radius: 8px;
 
   flex-direction: column;
+  flex-basis: 320px;
+  flex-shrink: 0;
 
   display: none;
+  margin-right: 16px;
   @media screen and (min-width: 768px) {
     display: flex;
+    margin-right: 24px;
   }
 
   & > .card:not(:last-child) {

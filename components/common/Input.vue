@@ -13,7 +13,7 @@ const model = defineModel<string>()
     <input
       v-model.trim="model"
       v-bind="$attrs"
-      :style="`border-radius: ${label ? 8 : 16}px`"
+      :style="`border-radius: ${label ? 4 : 16}px`"
     />
   </label>
 </template>
@@ -30,21 +30,26 @@ span {
 }
 
 input {
-  padding: 0.5rem 1rem;
-  border: var(--border-base);
+  padding: calc(0.5rem - 2px) 1rem;
+  border: 2px solid #bbc9d3;
+  outline: none;
 
   color: var(--color-font);
   background-color: var(--color-ctrl);
 
-  outline: 2px solid transparent;
-  outline-offset: -1px;
   transition: 0.2s;
   &:focus {
-    outline-color: var(--color-primary);
+    border-color: var(--color-primary);
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--color-ctrl-hover);
+  }
+
+  &[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 }
 </style>

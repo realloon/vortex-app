@@ -20,27 +20,38 @@ $graphql.default.setHeader(
   <AppHeader />
   <div class="main-view">
     <AppAside />
-    <main><slot></slot></main>
-    <AppRight />
+    <div class="center-view">
+      <main><slot /></main>
+      <AppRight />
+    </div>
   </div>
 </template>
 
 <style scoped>
 .main-view {
-  max-width: 1440px;
-
   display: flex;
   align-items: flex-start;
   background-color: var(--color-page);
 }
 
+.center-view {
+  width: 100%;
+  max-width: 1080px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+
+  margin-top: 1rem;
+  margin-inline: auto;
+}
+
 main {
   flex-grow: 1;
-  margin-block: 16px 48px;
+  margin-left: 16px;
 
-  margin-inline: 16px;
   @media screen and (min-width: 768px) {
-    margin-inline: 48px;
+    margin-left: 24px;
   }
 }
 </style>

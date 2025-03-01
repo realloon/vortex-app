@@ -5,8 +5,6 @@ const userStore = useUserStore()
 
 const dialog = useTemplateRef('dialog')
 
-const minLength = 8
-
 const email = ref('')
 const password = ref('')
 
@@ -17,26 +15,22 @@ function showLogin() {
 defineExpose({ showLogin })
 
 const { $graphql } = useNuxtApp()
-async function submit(e: Event) {
+async function submit() {
+  // TODO: verify
   if (!email.value || !password.value) {
     console.error('Invalid value.')
     return
   }
 
   try {
-    // TODO: need login method.
-    // Check email:
-    //   If present, login, verify password, return token;
-    //   If absent, register, save to DB, return token.
-    // Should be done on server.
-    const { createUser: token } = await $graphql.default
+    const { login: token } = await $graphql.default
       .request<GraphQLResponse>(` 
         mutation {
-          createUser(email: "${email.value}", password: "${password.value}") 
+          login(email: "${email.value}", password: "${password.value}") 
         }
       `)
-
     userStore.token = token
+    dialog.value?.close()
   } catch (err) {
     console.error(err)
   }
@@ -71,7 +65,7 @@ async function submit(e: Event) {
         label="密码："
         placeholder="请用系统或浏览器生成强密码"
         required
-        :minlength="minLength"
+        :minlength="8"
         type="password"
         autocomplete="new-password"
         name="password"

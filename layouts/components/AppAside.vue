@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import NavSection from './NavSection.vue'
-import { IconBBS, IconAbout, IconChatRoom } from '#components'
 
 const topicNav = [
   {
@@ -35,6 +34,10 @@ const topicNav = [
     </nav>
 
     <NavSection :items="topicNav" title="话题" mode="mitt" />
+
+    <CommonSpacer />
+
+    <NuxtLink to="/user"><IconUser />个人空间</NuxtLink>
   </aside>
 </template>
 
